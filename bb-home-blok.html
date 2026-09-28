@@ -1,0 +1,464 @@
+<!-- ===== NUOVA HOME (Alessia v8) — inizio ===== -->
+<div id="bb-home">
+<!-- ===== Booty Builder — Home v8 "Tre colori" (widget HTML Elementor) =====
+     CSS limitato a .bb: non tocca il tema WordPress.
+     Da sostituire prima di pubblicare:
+       - la foto di apertura (cercare "FOTO DI APERTURA")
+       - numero WhatsApp impostato -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
+<!-- Icone Font Awesome (solo le due parti necessarie per il marchio WhatsApp).
+     Se il tema carica gia Font Awesome, queste due righe si possono togliere. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+<style>
+/* Tre soli colori: cipria (sfondo), bordeaux (accenti e testo), bianco (riquadri).
+   Le altre tonalita' sono schiarimenti o scurimenti del bordeaux. */
+.bb{
+  --cipria:#F7E6E1; --wine:#6E1B33; --white:#FFFFFF;
+  --wine-deep:#4A0F20; --ink:#3A121F; --muted:#8C5A69; --line:rgba(110,27,51,.16);
+  --shadow:0 14px 40px rgba(74,15,32,.08);
+  background:var(--cipria); color:var(--ink);
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased; text-align:left;
+}
+.bb *,.bb *::before,.bb *::after{box-sizing:border-box}
+.bb img{max-width:100%;height:auto;display:block}
+.bb a{color:inherit}
+.bb p{margin:0}
+.bb p + p{margin-top:14px}
+.bb strong{font-weight:700;color:var(--wine)}
+.bb h1,.bb h2,.bb h3{margin:0;padding:0;color:var(--ink);font-family:'DM Serif Display',Georgia,'Times New Roman',serif;font-weight:400;text-transform:none;letter-spacing:-0.01em;line-height:1.1}
+.bb :focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+.bb .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+
+/* comparsa allo scorrimento (attiva solo via JS) */
+.bb.rv [data-rv]{opacity:0;transform:translateY(16px);transition:opacity .55s ease-out,transform .55s ease-out}
+.bb.rv [data-rv].rv-in{opacity:1;transform:none}
+
+/* pulsanti */
+.bb .btns{display:flex;flex-wrap:wrap;gap:12px}
+.bb .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:999px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15.5px;line-height:1.2;text-decoration:none;text-transform:none;letter-spacing:0;border:1.5px solid transparent;cursor:pointer;box-shadow:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.bb .btn-solid{background:var(--wine);color:var(--white);border-color:var(--wine)}
+.bb .btn-solid:hover{background:var(--wine-deep);border-color:var(--wine-deep);color:var(--white)}
+.bb .btn-light{background:var(--white);color:var(--wine);border-color:var(--white)}
+.bb .btn-light:hover{background:var(--cipria);border-color:var(--cipria);color:var(--wine-deep)}
+.bb .btn-clear{background:transparent;color:var(--white);border-color:rgba(255,255,255,.55)}
+.bb .btn-icon{width:54px;min-width:54px;padding:0;border-radius:50%;flex:0 0 auto}
+.bb .btn-icon svg,.bb .btn-icon img{width:26px;height:26px;display:block}
+.bb .btn-icon i{font-size:26px;line-height:1;font-style:normal}
+.bb .btn-clear:hover{background:transparent;color:var(--white);border-color:var(--white)}
+
+/* barra ferma in alto */
+.bb .top{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--line)}
+.bb .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.bb .logo{text-decoration:none;font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:23px;color:var(--wine)}
+.bb .logo span{font-family:'Manrope',sans-serif;font-weight:500;font-size:13.5px;color:var(--muted);margin-left:10px}
+.bb .me{text-decoration:none;color:var(--white);background:var(--wine);padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px}
+.bb .me:hover{background:var(--wine-deep);color:var(--white)}
+
+/* apertura con foto */
+.bb .hero{position:relative;min-height:74vh;display:flex;align-items:center;overflow:hidden;background:var(--wine-deep)}
+.bb .hero-media{position:absolute;top:0;right:0;bottom:0;left:0;background:var(--wine-deep)}
+.bb .hero-media img{width:100%;height:100%;object-fit:cover}
+.bb .hero-veil{position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(180deg,rgba(74,15,32,.58) 0%,rgba(74,15,32,.7) 55%,rgba(74,15,32,.86) 100%)}
+.bb .hero-inner{position:relative;text-align:center;padding:96px 32px 88px}
+.bb .kicker{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:21px;color:var(--cipria)}
+.bb .kicker .peach{width:clamp(34px,4.4vw,48px);height:clamp(34px,4.4vw,48px);color:var(--cipria)}
+.bb .hero h1{margin-top:14px;color:var(--white);font-size:clamp(42px,6vw,78px);line-height:1.02;max-width:15ch;margin-left:auto;margin-right:auto}
+.bb .hero .sub{margin:22px auto 0;max-width:52ch;font-size:20px;color:rgba(255,255,255,.85)}
+.bb .hero .btns{margin-top:30px;justify-content:center}
+.bb .hero .who{margin-top:22px;font-size:14.5px;color:rgba(255,255,255,.62)}
+
+/* sezioni */
+.bb .sec{padding:68px 0}
+.bb .sec.a{background:var(--cipria)}
+.bb .sec.b{background:var(--white)}
+.bb .sechead{text-align:center;max-width:62ch;margin:0 auto}
+.bb h2{font-size:clamp(34px,4.3vw,54px)}
+.bb .lede{margin-top:16px;font-size:19px;color:var(--muted)}
+.bb .prose{max-width:68ch;margin:28px auto 0}
+
+/* pilastri */
+.bb .pillars{margin-top:36px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.bb .pillars article{background:var(--white);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
+.bb .sec.b .pillars article{background:var(--cipria);box-shadow:none}
+.bb .ico{width:42px;height:42px;border-radius:13px;background:var(--cipria);display:flex;align-items:center;justify-content:center;color:var(--wine)}
+.bb .sec.b .ico{background:var(--white)}
+.bb .ico svg{width:22px;height:22px;display:block}
+.bb .pillars h3{margin-top:16px;font-size:25px}
+.bb .pillars p{margin-top:10px;font-size:17px;line-height:1.6}
+
+/* frase in evidenza */
+.bb .quote{background:var(--wine);padding:76px 0;text-align:center}
+.bb .quote p{font-family:'DM Serif Display',Georgia,serif;font-style:italic;color:var(--white);
+  font-size:clamp(32px,4.6vw,58px);line-height:1.12;max-width:18ch;margin:0 auto}
+
+/* quattro passaggi in riga */
+.bb .steps{margin:36px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+.bb .steps li{margin:0;background:var(--cipria);border-radius:22px;padding:26px 22px}
+.bb .steps li::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--wine);color:var(--white);font-weight:700;font-size:15px;font-family:'Manrope',sans-serif}
+.bb .steps h3{margin-top:14px;font-size:23px}
+.bb .steps p{margin-top:9px;font-size:16.5px;line-height:1.55}
+
+/* fasi */
+.bb .phases{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.bb .phases article{background:var(--white);border-radius:22px;padding:26px 24px;box-shadow:var(--shadow)}
+.bb .phases .when{font-weight:700;color:var(--wine);font-size:14.5px}
+.bb .phases h3{margin-top:4px;font-size:24px}
+.bb .phases p{margin-top:10px;font-size:17px;line-height:1.55}
+
+/* cosa include */
+.bb .incl-block{margin-top:44px;background:var(--white);border-radius:24px;padding:40px;box-shadow:var(--shadow)}
+.bb .incl-title{text-align:center;font-size:29px;margin-top:0}
+.bb .incl{margin:24px auto 0;max-width:1000px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 40px;padding:0;list-style:none}
+.bb .incl li{margin:0;display:grid;grid-template-columns:24px 1fr;gap:13px;align-items:start;font-size:17px;line-height:1.55}
+.bb .tick{display:flex;align-items:center;justify-content:center;width:21px;height:21px;margin-top:4px;border-radius:50%;background:var(--wine);color:var(--white)}
+.bb .tick svg{width:11px;height:11px;display:block}
+.bb .note{margin:24px auto 0;font-size:15.5px;color:var(--muted);max-width:66ch;text-align:center}
+
+/* chiusura */
+.bb .cta{padding:80px 0;background:var(--wine);color:var(--white);text-align:center}
+.bb .cta h2{color:var(--white);font-size:clamp(38px,5vw,64px)}
+.bb .cta p{margin:18px auto 0;font-size:19px;color:rgba(255,255,255,.88);max-width:58ch}
+.bb .cta strong{color:var(--white)}
+.bb .cta .btns{margin-top:28px;justify-content:center}
+
+/* area personale */
+.bb .area{padding:68px 0;background:var(--cipria)}
+.bb .login{background:var(--white);border-radius:24px;padding:34px 30px;box-shadow:var(--shadow);max-width:440px;margin:28px auto 0}
+.bb .fields{display:grid;gap:13px}
+.bb .login label{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.bb .login input{width:100%;min-height:52px;padding:0 15px;border:1px solid var(--line);border-radius:12px;background:var(--cipria);color:var(--ink);font-family:'Manrope',sans-serif;font-size:16px;font-weight:400;box-shadow:none}
+.bb .login input:focus{border-color:var(--wine);outline:none;background:var(--white)}
+.bb .login .btn{width:100%;margin-top:4px}
+.bb .demo{margin-top:14px;font-size:15px;color:var(--muted);text-align:center}
+.bb .linklike{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--wine);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.bb .linklike:hover{background:none;color:var(--wine-deep)}
+
+.bb .foot{background:var(--white);border-top:1px solid var(--line)}
+.bb .foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;padding-bottom:28px;font-size:14.5px;color:var(--muted)}
+.bb .foot a{text-decoration:none}
+.bb .foot a:hover{color:var(--wine)}
+
+/* integrazione app: #bb a altezza zero mentre la home e visibile */
+#bb.bb-home-on{min-height:0!important}
+
+/* barretta telefono */
+.bb .sticky{display:none}
+
+@media (max-width:980px){
+  .bb .hero{min-height:66vh}
+  .bb .hero-inner{padding:80px 28px 72px}
+  .bb .pillars,.bb .phases{grid-template-columns:1fr}
+  .bb .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bb .incl{grid-template-columns:1fr;gap:13px}
+  .bb .sec,.bb .area{padding:56px 0}
+  .bb .incl-block{padding:32px 26px;margin-top:38px}
+  .bb .quote{padding:60px 0}
+  .bb .cta{padding:68px 0}
+}
+@media (max-width:600px){
+  .bb{font-size:17.5px}
+  .bb .wrap{padding:0 20px}
+  .bb .top .wrap{height:60px}
+  .bb .logo span{display:none}
+  .bb .hero{min-height:82vh}
+  .bb .hero-inner{padding:64px 20px 72px}
+  .bb .hero .btns .btn{width:100%}
+  .bb .hero .btns .btn-icon{width:54px}
+  .bb .steps{grid-template-columns:1fr}
+  .bb .sec,.bb .area{padding:48px 0}
+  .bb .quote{padding:52px 0}
+  .bb .cta{padding:56px 0}
+  .bb .cta .btn{width:100%}
+  .bb .cta .btn-icon{width:54px}
+  .bb .login{padding:28px 22px}
+  .bb .incl-block{padding:26px 20px;border-radius:20px;margin-top:34px}
+  .bb .sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(247,230,225,.95);border-top:1px solid var(--line);transform:translateY(120%);transition:transform .25s ease}
+  .bb .sticky.on{transform:none}
+  .bb .sticky .btn{width:100%;min-height:50px}
+}
+@media (prefers-reduced-motion: reduce){
+  .bb .btn,.bb .sticky{transition:none}
+  .bb.rv [data-rv]{opacity:1;transform:none;transition:none}
+}
+
+/* --- le 8 settimane come percorso verticale --- */
+.bb .phases{grid-template-columns:1fr;gap:0;max-width:760px;margin-left:auto;margin-right:auto;position:relative}
+.bb .phases::before{content:"";position:absolute;top:12px;bottom:12px;left:13px;width:2px;background:var(--line)}
+.bb .phases article{background:transparent;box-shadow:none;border-radius:0;padding:0 0 30px 46px;position:relative}
+.bb .phases article::before{content:"";position:absolute;left:5px;top:9px;width:18px;height:18px;border-radius:50%;background:var(--wine);border:4px solid var(--cipria)}
+.bb .phases article:last-child{padding-bottom:0}
+</style>
+
+<div class="bb" id="bb-root">
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#bb-root">Booty Builder<span>di Alessia Taglioni</span></a>
+    <a class="me js-goto-login" href="#s-login">Area personale</a>
+  </div>
+</header>
+
+<section class="hero" id="bb-hero">
+  <!-- FOTO DI APERTURA: sostituire il commento qui sotto con
+       <img src="URL-MEDIA-LIBRARY" alt="Alessia Taglioni in palestra">
+       Consigliata una foto orizzontale, soggetto non al centro esatto. -->
+  <div class="hero-media"><img src="https://sport-fit.org/wp-content/uploads/2026/07/file_00000000835082439736c27383ab22c8.png" alt="Alessia Taglioni in palestra"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="kicker"><svg class="peach" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.6 5.9c1.7-1.6 4.4-1.6 6.1-.1 2 1.8 2.4 5 1 7.8-1.5 3-4.5 5-7.7 5s-6.2-2-7.7-5c-1.4-2.8-1-6 1-7.8 1.7-1.5 4.4-1.5 6.1.1Z" fill="currentColor"/><path d="M12.3 8.4c-.5 3.1-.5 6.3 0 9.4" fill="none" stroke="var(--wine-deep)" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/><path d="M12.4 5.6c.1-1.9 1.6-3.4 3.5-3.6.1 1.9-1.4 3.5-3.3 3.7Z" fill="currentColor" fill-opacity=".62"/></svg><span>Booty Builder</span></p>
+    <h1>Un programma di allenamento costruito su di te</h1>
+    <p class="sub">8 settimane di programmazione con focus sui glutei, all'interno di un allenamento che coinvolge tutto il corpo in modo armonico e proporzionato. Costruita sul tuo livello di partenza, sulla tua disponibilità settimanale e sull'attrezzatura della palestra.</p>
+    <div class="btns">
+      <button class="btn btn-light" type="button" id="btn-public-quiz">Compila il questionario</button>
+      <a class="btn btn-clear btn-icon" href="https://wa.me/393668727005" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp" title="Scrivimi su WhatsApp"><!-- Icona WhatsApp di Font Awesome, caricata dal tema. Se il cerchio resta vuoto, Font Awesome non e attivo su questa pagina: aggiungi un widget Icona di Elementor alla pagina, oppure scrivimi e rimetto la scritta. --><i class="fab fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+    </div>
+    <p class="who">Alessia Taglioni, personal trainer — ASD Sport Fit, Gorizia</p>
+  </div>
+</section>
+
+<section class="sec b" id="bb-metodo">
+  <div class="wrap">
+    <div class="sechead" data-rv>
+      <h2>Risultati, motivazione ed equilibrio</h2>
+      <p class="lede">Booty Builder nasce con un obiettivo preciso: portarti al massimo dei risultati nel modo più sano ed equilibrato possibile.</p>
+    </div>
+    <div class="prose" data-rv>
+      <p>Nessuna scorciatoia e nessuna restrizione estrema, ma un lavoro serio, progressivo e sostenibile, costruito nel rispetto del tuo corpo e dei tuoi tempi. Il focus resta sui glutei, ma l'allenamento comprende <strong>tutto il corpo</strong>: è questa la condizione per una forma fisica armonica e proporzionata, senza squilibri. Seguire un piano costruito su di te significa <strong>sapere con esattezza cosa fare a ogni allenamento</strong>: nessun esercizio scelto a caso, nessuna settimana priva di direzione. È questa chiarezza a rendere la costanza molto più semplice da mantenere.</p>
+      <p>È anche l'aspetto che le ragazze che seguo riportano con maggiore frequenza: la consapevolezza di <strong>avere finalmente il controllo del proprio allenamento</strong>, la soddisfazione di veder progredire i carichi settimana dopo settimana e una fiducia in sé che cresce parallelamente alla forza.</p>
+    </div>
+    <div class="pillars">
+      <article data-rv>
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2.5 3 5.5 5.2 5.5 9a5.5 5.5 0 1 1-11 0c0-1.7.7-3 1.6-4.2.6 1 1.3 1.6 2.1 1.9C9.6 7.4 10.4 5 12 3Z"/></svg></div>
+        <h3>Motivazione costante</h3>
+        <p>Obiettivi definiti, progressi misurabili e un riferimento sempre disponibile sono <strong>ciò che sostiene la continuità</strong> anche nei periodi più impegnativi.</p>
+      </article>
+      <article data-rv>
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V10m5 9V5m5 14v-7m5 7V8"/></svg></div>
+        <h3>Risultati ottimizzati</h3>
+        <p>Ogni serie, ripetizione e tempo di recupero risponde a un criterio, così che <strong>ogni allenamento costruisca sul precedente</strong>.</p>
+      </article>
+      <article data-rv>
+        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.3-7-9.3A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 7 2.7C19 15.7 12 20 12 20Z"/></svg></div>
+        <h3>Benessere mentale</h3>
+        <p>Imparare a <strong>valutare i progressi oltre il peso sulla bilancia</strong> modifica il rapporto con il proprio corpo, oltre che la forma fisica.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="quote" data-rv>
+  <div class="wrap">
+    <p>Sei il tuo miglior investimento</p>
+  </div>
+</section>
+
+<section class="sec b" id="bb-percorso">
+  <div class="wrap">
+    <div class="sechead" data-rv>
+      <h2>Come funziona</h2>
+      <p class="lede">Dal questionario iniziale all'ultima settimana, il percorso si articola in quattro fasi.</p>
+    </div>
+    <ol class="steps">
+      <li data-rv>
+        <h3>Analisi iniziale</h3>
+        <p>Un questionario su <strong>obiettivi, esperienza, disponibilità settimanale, infortuni e limitazioni</strong>. È la base della programmazione.</p>
+      </li>
+      <li data-rv>
+        <h3>Consegna del programma</h3>
+        <p>8 settimane sui giorni indicati, con <strong>serie, ripetizioni, recuperi ed esercizi alternativi</strong>. Focus sui glutei dentro <strong>un lavoro su tutto il corpo</strong>, armonico e proporzionato.</p>
+      </li>
+      <li data-rv>
+        <h3>Sessione in palestra</h3>
+        <p><strong>Affrontiamo insieme l'intera scheda</strong>, una serie per esercizio: tecnica, respirazione, macchinari e carichi di partenza.</p>
+      </li>
+      <li data-rv>
+        <h3>Assistenza continua</h3>
+        <p><strong>Resto a tua disposizione su WhatsApp</strong> fino alla fine del ciclo: dubbi sui carichi, video da correggere, imprevisti.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec a" id="bb-programma">
+  <div class="wrap">
+    <div class="sechead" data-rv>
+      <h2>Le 8 settimane</h2>
+      <p class="lede">La programmazione non resta invariata: l'intensità cresce progressivamente, secondo tre fasi distinte.</p>
+    </div>
+    <div class="phases">
+      <article data-rv>
+        <p class="when">Settimane 1 e 2</p>
+        <h3>Apprendimento</h3>
+        <p>Acquisisci familiarità con gli esercizi e individui i carichi adeguati. La priorità è <strong>la qualità dell'esecuzione</strong>.</p>
+      </article>
+      <article data-rv>
+        <p class="when">Settimane da 3 a 6</p>
+        <h3>Progressione</h3>
+        <p>Carichi e volume aumentano gradualmente. È la fase in cui <strong>si manifestano i primi risultati</strong>.</p>
+      </article>
+      <article data-rv>
+        <p class="when">Settimane 7 e 8</p>
+        <h3>Intensificazione</h3>
+        <p>Si raggiunge il picco del ciclo. Al termine <strong>valutiamo i progressi</strong> e definiamo la programmazione successiva.</p>
+      </article>
+    </div>
+
+    <div class="incl-block" data-rv>
+      <h3 class="incl-title">Cosa include il percorso</h3>
+      <ul class="incl">
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Programmazione di 8 settimane</strong> con progressione ed esercizi alternativi.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Sessione dimostrativa in palestra</strong>, con l'intera scheda illustrata dal vivo.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Assistenza continua su WhatsApp</strong> per dubbi, carichi e imprevisti.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Video degli esercizi su richiesta</strong> per i movimenti meno immediati.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Ripasso in presenza</strong>, per rivedere insieme un esercizio quando serve.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Correzione della tecnica a distanza</strong> dai tuoi video di esecuzione.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Adattamenti in corso d'opera</strong> al variare di orari o attrezzatura.</span></li>
+        <li><span class="tick" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.4 12 13 4.5"/></svg></span><span><strong>Analisi finale del ciclo</strong> e impostazione della programmazione successiva.</span></li>
+      </ul>
+      <p class="note">La parte in presenza è costituita dalla sessione dimostrativa iniziale: il percorso non prevede sedute individuali ricorrenti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap" data-rv>
+    <h2>Build your best body</h2>
+    <p>Il primo passo è il questionario iniziale, che puoi compilare in pochi minuti. In alternativa puoi contattarmi su WhatsApp: <strong>valuteremo insieme il percorso più adatto ai tuoi obiettivi</strong>, senza alcun impegno.</p>
+    <div class="btns">
+      <button class="btn btn-light js-quiz" type="button">Compila il questionario</button>
+      <a class="btn btn-clear btn-icon" href="https://wa.me/393668727005" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp" title="Scrivimi su WhatsApp"><!-- Icona WhatsApp di Font Awesome, caricata dal tema. Se il cerchio resta vuoto, Font Awesome non e attivo su questa pagina: aggiungi un widget Icona di Elementor alla pagina, oppure scrivimi e rimetto la scritta. --><i class="fab fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="s-login">
+  <div class="wrap">
+    <div class="sechead" data-rv>
+      <h2>Area personale</h2>
+      <p class="lede">Se hai già avviato il percorso, da qui accedi alla tua scheda, sempre disponibile, anche dal telefono durante l'allenamento.</p>
+    </div>
+    <div class="login" data-rv>
+      <div class="fields">
+        <div><label for="l-email">Email</label><input type="email" id="l-email" autocomplete="email"></div>
+        <div><label for="l-pass">Password</label><input type="password" id="l-pass" autocomplete="current-password"></div>
+        <button class="btn btn-solid" type="button" id="btn-login">Accedi</button>
+      </div>
+      <p class="demo">Non disponi ancora delle credenziali? <button class="linklike" type="button" id="btn-demo">Visualizza un'anteprima dell'area personale</button></p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>ASD Sport Fit — Corso Italia 187, Gorizia</span>
+    <a class="js-goto-login" href="#s-login">Area personale</a>
+  </div>
+</footer>
+
+<div class="sticky" id="bb-sticky">
+  <button class="btn btn-solid js-quiz" type="button">Compila il questionario</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  function closestEl(el, sel){
+    while (el && el.nodeType === 1) {
+      if (el.matches && el.matches(sel)) return el;
+      el = el.parentNode;
+    }
+    return null;
+  }
+  function addClass(el, name){
+    if (el && el.className.indexOf(name) === -1) el.className += ' ' + name;
+  }
+  function removeClass(el, name){
+    if (!el) return;
+    el.className = (' ' + el.className + ' ').split(' ' + name + ' ').join(' ').replace(/\s+/g, ' ');
+  }
+
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if (!t) return;
+
+    /* gli altri pulsanti del questionario riusano il gestore del primo */
+    if (closestEl(t, '.js-quiz')) {
+      e.preventDefault();
+      var q = document.getElementById('btn-public-quiz');
+      if (q) q.click();
+      return;
+    }
+
+    /* "Area personale": scorre al riquadro di accesso e mette il cursore nell'email */
+    if (closestEl(t, '.js-goto-login')) {
+      var s = document.getElementById('s-login');
+      if (s && s.offsetParent !== null) {
+        e.preventDefault();
+        s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var em = document.getElementById('l-email');
+        if (em) setTimeout(function(){ em.focus({ preventScroll: true }); }, 500);
+      }
+      return;
+    }
+
+    /* menu interno: scorrimento morbido senza cambiare l'URL */
+    var a = closestEl(t, '.bb a[href^="#bb-"]');
+    if (a) {
+      var dest = document.getElementById(a.getAttribute('href').substring(1));
+      if (dest) { e.preventDefault(); dest.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+  });
+
+  /* comparsa allo scorrimento: senza JS, o su browser vecchi, tutto resta visibile */
+  function setupReveal(){
+    var root = document.getElementById('bb-root');
+    if (!root || !window.IntersectionObserver) return;
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    if (mq && mq.matches) return;
+
+    addClass(root, 'rv');
+    var items = root.querySelectorAll('[data-rv]');
+    if (!items.length) return;
+
+    var obs = new IntersectionObserver(function(entries){
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          addClass(entries[i].target, 'rv-in');
+          obs.unobserve(entries[i].target);
+        }
+      }
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    for (var j = 0; j < items.length; j++) {
+      if (items[j].className.indexOf('rv-in') === -1) obs.observe(items[j]);
+    }
+  }
+
+  /* barretta con il pulsante: compare su telefono dopo l'apertura */
+  function setupSticky(){
+    var hero = document.getElementById('bb-hero');
+    var bar = document.getElementById('bb-sticky');
+    if (!hero || !bar || !window.IntersectionObserver) return;
+
+    var obs = new IntersectionObserver(function(entries){
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { removeClass(bar, 'on'); }
+        else { addClass(bar, 'on'); }
+      }
+    }, { threshold: 0 });
+    obs.observe(hero);
+  }
+
+  setupReveal();
+  setupSticky();
+  setTimeout(function(){ setupReveal(); setupSticky(); }, 900);
+  window.addEventListener('load', function(){ setupReveal(); setupSticky(); });
+})();
+</script>
+<!-- ===== fine Booty Builder — Home v8 "Tre colori" ===== -->
+</div>
+<!-- ===== NUOVA HOME — fine ===== -->
