@@ -1,12 +1,5 @@
-<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Booty Builder — Alessia Taglioni</title>
-<style>html,body{margin:0;padding:0}</style>
-</head>
-<body>
+<!-- ===== NUOVA HOME (Alessia v8) — inizio ===== -->
+<div id="bb-home">
 <!-- ===== Booty Builder — Home v8 "Tre colori" (widget HTML Elementor) =====
      CSS limitato a .bb: non tocca il tema WordPress.
      Da sostituire prima di pubblicare:
@@ -14,6 +7,10 @@
        - numero WhatsApp impostato -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
+<!-- Icone Font Awesome (solo le due parti necessarie per il marchio WhatsApp).
+     Se il tema carica gia Font Awesome, queste due righe si possono togliere. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
 <style>
 /* Tre soli colori: cipria (sfondo), bordeaux (accenti e testo), bianco (riquadri).
    Le altre tonalita' sono schiarimenti o scurimenti del bordeaux. */
@@ -47,6 +44,9 @@
 .bb .btn-light{background:var(--white);color:var(--wine);border-color:var(--white)}
 .bb .btn-light:hover{background:var(--cipria);border-color:var(--cipria);color:var(--wine-deep)}
 .bb .btn-clear{background:transparent;color:var(--white);border-color:rgba(255,255,255,.55)}
+.bb .btn-icon{width:54px;min-width:54px;padding:0;border-radius:50%;flex:0 0 auto}
+.bb .btn-icon svg,.bb .btn-icon img{width:26px;height:26px;display:block}
+.bb .btn-icon i{font-size:26px;line-height:1;font-style:normal}
 .bb .btn-clear:hover{background:transparent;color:var(--white);border-color:var(--white)}
 
 /* barra ferma in alto */
@@ -63,7 +63,8 @@
 .bb .hero-media img{width:100%;height:100%;object-fit:cover}
 .bb .hero-veil{position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(180deg,rgba(74,15,32,.58) 0%,rgba(74,15,32,.7) 55%,rgba(74,15,32,.86) 100%)}
 .bb .hero-inner{position:relative;text-align:center;padding:96px 32px 88px}
-.bb .kicker{font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:21px;color:var(--cipria)}
+.bb .kicker{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:21px;color:var(--cipria)}
+.bb .kicker .peach{width:clamp(34px,4.4vw,48px);height:clamp(34px,4.4vw,48px);color:var(--cipria)}
 .bb .hero h1{margin-top:14px;color:var(--white);font-size:clamp(42px,6vw,78px);line-height:1.02;max-width:15ch;margin-left:auto;margin-right:auto}
 .bb .hero .sub{margin:22px auto 0;max-width:52ch;font-size:20px;color:rgba(255,255,255,.85)}
 .bb .hero .btns{margin-top:30px;justify-content:center}
@@ -103,11 +104,6 @@
 /* fasi */
 .bb .phases{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .bb .phases article{background:var(--white);border-radius:22px;padding:26px 24px;box-shadow:var(--shadow)}
-.bb .phases article:nth-child(3){background:var(--wine);box-shadow:none}
-.bb .phases article:nth-child(3) h3{color:var(--white)}
-.bb .phases article:nth-child(3) p{color:rgba(255,255,255,.85)}
-.bb .phases article:nth-child(3) strong{color:var(--white)}
-.bb .phases article:nth-child(3) .when{color:var(--cipria)}
 .bb .phases .when{font-weight:700;color:var(--wine);font-size:14.5px}
 .bb .phases h3{margin-top:4px;font-size:24px}
 .bb .phases p{margin-top:10px;font-size:17px;line-height:1.55}
@@ -145,6 +141,9 @@
 .bb .foot a{text-decoration:none}
 .bb .foot a:hover{color:var(--wine)}
 
+/* integrazione app: #bb a altezza zero mentre la home e visibile */
+#bb.bb-home-on{min-height:0!important}
+
 /* barretta telefono */
 .bb .sticky{display:none}
 
@@ -167,11 +166,13 @@
   .bb .hero{min-height:82vh}
   .bb .hero-inner{padding:64px 20px 72px}
   .bb .hero .btns .btn{width:100%}
+  .bb .hero .btns .btn-icon{width:54px}
   .bb .steps{grid-template-columns:1fr}
   .bb .sec,.bb .area{padding:48px 0}
   .bb .quote{padding:52px 0}
   .bb .cta{padding:56px 0}
   .bb .cta .btn{width:100%}
+  .bb .cta .btn-icon{width:54px}
   .bb .login{padding:28px 22px}
   .bb .incl-block{padding:26px 20px;border-radius:20px;margin-top:34px}
   .bb .sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(247,230,225,.95);border-top:1px solid var(--line);transform:translateY(120%);transition:transform .25s ease}
@@ -182,6 +183,13 @@
   .bb .btn,.bb .sticky{transition:none}
   .bb.rv [data-rv]{opacity:1;transform:none;transition:none}
 }
+
+/* --- le 8 settimane come percorso verticale --- */
+.bb .phases{grid-template-columns:1fr;gap:0;max-width:760px;margin-left:auto;margin-right:auto;position:relative}
+.bb .phases::before{content:"";position:absolute;top:12px;bottom:12px;left:13px;width:2px;background:var(--line)}
+.bb .phases article{background:transparent;box-shadow:none;border-radius:0;padding:0 0 30px 46px;position:relative}
+.bb .phases article::before{content:"";position:absolute;left:5px;top:9px;width:18px;height:18px;border-radius:50%;background:var(--wine);border:4px solid var(--cipria)}
+.bb .phases article:last-child{padding-bottom:0}
 </style>
 
 <div class="bb" id="bb-root">
@@ -197,15 +205,15 @@
   <!-- FOTO DI APERTURA: sostituire il commento qui sotto con
        <img src="URL-MEDIA-LIBRARY" alt="Alessia Taglioni in palestra">
        Consigliata una foto orizzontale, soggetto non al centro esatto. -->
-  <div class="hero-media"><!-- <img src="URL-MEDIA-LIBRARY" alt="Alessia Taglioni in palestra"> --></div>
+  <div class="hero-media"><img src="https://sport-fit.org/wp-content/uploads/2026/07/file_00000000835082439736c27383ab22c8.png" alt="Alessia Taglioni in palestra"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap hero-inner">
-    <p class="kicker">Booty Builder</p>
+    <p class="kicker"><svg class="peach" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.6 5.9c1.7-1.6 4.4-1.6 6.1-.1 2 1.8 2.4 5 1 7.8-1.5 3-4.5 5-7.7 5s-6.2-2-7.7-5c-1.4-2.8-1-6 1-7.8 1.7-1.5 4.4-1.5 6.1.1Z" fill="currentColor"/><path d="M12.3 8.4c-.5 3.1-.5 6.3 0 9.4" fill="none" stroke="var(--wine-deep)" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/><path d="M12.4 5.6c.1-1.9 1.6-3.4 3.5-3.6.1 1.9-1.4 3.5-3.3 3.7Z" fill="currentColor" fill-opacity=".62"/></svg><span>Booty Builder</span></p>
     <h1>Un programma di allenamento costruito su di te</h1>
-    <p class="sub">8 settimane di programmazione dedicata ai glutei, sviluppata sul tuo livello di partenza, sulla tua disponibilità settimanale e sull'attrezzatura della palestra.</p>
+    <p class="sub">8 settimane di programmazione con focus sui glutei, all'interno di un allenamento che coinvolge tutto il corpo in modo armonico e proporzionato. Costruita sul tuo livello di partenza, sulla tua disponibilità settimanale e sull'attrezzatura della palestra.</p>
     <div class="btns">
       <button class="btn btn-light" type="button" id="btn-public-quiz">Compila il questionario</button>
-      <a class="btn btn-clear" href="https://wa.me/393668727005" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+      <a class="btn btn-clear btn-icon" href="https://wa.me/393668727005" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp" title="Scrivimi su WhatsApp"><!-- Icona WhatsApp di Font Awesome, caricata dal tema. Se il cerchio resta vuoto, Font Awesome non e attivo su questa pagina: aggiungi un widget Icona di Elementor alla pagina, oppure scrivimi e rimetto la scritta. --><i class="fab fa-brands fa-whatsapp" aria-hidden="true"></i></a>
     </div>
     <p class="who">Alessia Taglioni, personal trainer — ASD Sport Fit, Gorizia</p>
   </div>
@@ -218,7 +226,7 @@
       <p class="lede">Booty Builder nasce con un obiettivo preciso: portarti al massimo dei risultati nel modo più sano ed equilibrato possibile.</p>
     </div>
     <div class="prose" data-rv>
-      <p>Nessuna scorciatoia e nessuna restrizione estrema, ma un lavoro serio, progressivo e sostenibile, costruito nel rispetto del tuo corpo e dei tuoi tempi. Seguire un piano costruito su di te significa <strong>sapere con esattezza cosa fare a ogni allenamento</strong>: nessun esercizio scelto a caso, nessuna settimana priva di direzione. È questa chiarezza a rendere la costanza molto più semplice da mantenere.</p>
+      <p>Nessuna scorciatoia e nessuna restrizione estrema, ma un lavoro serio, progressivo e sostenibile, costruito nel rispetto del tuo corpo e dei tuoi tempi. Il focus resta sui glutei, ma l'allenamento comprende <strong>tutto il corpo</strong>: è questa la condizione per una forma fisica armonica e proporzionata, senza squilibri. Seguire un piano costruito su di te significa <strong>sapere con esattezza cosa fare a ogni allenamento</strong>: nessun esercizio scelto a caso, nessuna settimana priva di direzione. È questa chiarezza a rendere la costanza molto più semplice da mantenere.</p>
       <p>È anche l'aspetto che le ragazze che seguo riportano con maggiore frequenza: la consapevolezza di <strong>avere finalmente il controllo del proprio allenamento</strong>, la soddisfazione di veder progredire i carichi settimana dopo settimana e una fiducia in sé che cresce parallelamente alla forza.</p>
     </div>
     <div class="pillars">
@@ -260,7 +268,7 @@
       </li>
       <li data-rv>
         <h3>Consegna del programma</h3>
-        <p>8 settimane sui giorni indicati, con <strong>serie, ripetizioni, recuperi ed esercizi alternativi</strong>. Focus glutei, lavoro su tutto il corpo.</p>
+        <p>8 settimane sui giorni indicati, con <strong>serie, ripetizioni, recuperi ed esercizi alternativi</strong>. Focus sui glutei dentro <strong>un lavoro su tutto il corpo</strong>, armonico e proporzionato.</p>
       </li>
       <li data-rv>
         <h3>Sessione in palestra</h3>
@@ -321,7 +329,7 @@
     <p>Il primo passo è il questionario iniziale, che puoi compilare in pochi minuti. In alternativa puoi contattarmi su WhatsApp: <strong>valuteremo insieme il percorso più adatto ai tuoi obiettivi</strong>, senza alcun impegno.</p>
     <div class="btns">
       <button class="btn btn-light js-quiz" type="button">Compila il questionario</button>
-      <a class="btn btn-clear" href="https://wa.me/393668727005" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+      <a class="btn btn-clear btn-icon" href="https://wa.me/393668727005" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp" title="Scrivimi su WhatsApp"><!-- Icona WhatsApp di Font Awesome, caricata dal tema. Se il cerchio resta vuoto, Font Awesome non e attivo su questa pagina: aggiungi un widget Icona di Elementor alla pagina, oppure scrivimi e rimetto la scritta. --><i class="fab fa-brands fa-whatsapp" aria-hidden="true"></i></a>
     </div>
   </div>
 </section>
@@ -452,5 +460,5 @@
 })();
 </script>
 <!-- ===== fine Booty Builder — Home v8 "Tre colori" ===== -->
-</body>
-</html>
+</div>
+<!-- ===== NUOVA HOME — fine ===== -->
