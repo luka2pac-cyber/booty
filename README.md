@@ -8,6 +8,7 @@ La pagina sport-fit.org/booty la mostra a schermo intero tramite iframe.
 File:
 - `index.html` — app completa (home + questionario + area personale + Firebase/EmailJS).
 - `bb-home-blok.html` — solo la home, come inviata da Alessia (v9-F). Da inserire in `index.html` tra `<!-- ===== NUOVA HOME` e `<!-- ===== NUOVA HOME — fine ===== -->`, mantenendo la sezione `id="s-login"` (Area personale).
+- `elementor-app.html` — app completa da incollare in Elementor (metodo attuale, finche non si passa all iframe).
 - `elementor-iframe.html` — codice da incollare UNA volta nel widget HTML di Elementor.
 
 ID da non rimuovere mai nella home: `bb-home`, `bb-root`, `s-login`, `l-email`, `l-pass`, `btn-login`, `btn-demo`, `btn-public-quiz`.
