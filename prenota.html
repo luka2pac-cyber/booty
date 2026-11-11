@@ -67,7 +67,7 @@ label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);text-tran
     <div class="msg" id="adm-msg"></div>
   </div>
 
-  <div id="info" class="info">Scegli una fascia libera per vederci in sala e guardare insieme la tua nuova scheda. Tocca <b>Prenota</b>, scrivi il tuo nome e conferma: la fascia diventa subito occupata per le altre atlete. Se hai un imprevisto, scrivi ad Alessia.</div>
+  <div id="info" class="info">Scegli una fascia libera per vederci in sala e guardare insieme la tua nuova scheda. Tocca <b>Prenota</b>, scrivi il tuo nome e conferma: la fascia diventa subito occupata per le altre atlete e Alessia viene avvisata. Se hai un imprevisto, scrivi ad Alessia.</div>
 
   <div id="list"><div class="empty">Caricamento…</div></div>
 
@@ -86,6 +86,7 @@ label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);text-tran
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){
 'use strict';
@@ -93,6 +94,7 @@ var FB={apiKey:"AIzaSyAWphlte1rpYqTibJlAaZKY4PktfSIGl1A",authDomain:"booty-build
 var ADMIN_EMAIL="aletaglionii@gmail.com";
 var WHATSAPP="393668727005";
 var COLL="prenotazioni";
+var EJS={key:"HUF2lsuirwprVgDyH",service:"service_hrt89od",template:"template_n2vf14c"};
 var LIVE_HOSTS=["luka2pac-cyber.github.io","sport-fit.org","www.sport-fit.org"];
 
 var qs=new URLSearchParams(location.search);
@@ -102,6 +104,7 @@ var GIORNI=["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","
 var MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
 
 var slots=[],isAdmin=false,openId=null,confirmDel=null,busy=false,db=null,auth=null;
+var mailFail=[];
 var mine=[];
 try{mine=JSON.parse(localStorage.getItem("bb_prenotazioni")||"[]");}catch(e){mine=[];}
 function saveMine(){try{localStorage.setItem("bb_prenotazioni",JSON.stringify(mine));}catch(e){}}
@@ -150,7 +153,9 @@ function render(){
         if(openId===s.id)h+=formHtml(s.id,"Il tuo nome","Conferma");
         else h+='<div class="row"><button type="button" data-a="open" data-id="'+esc(s.id)+'">Prenota</button></div>';
       }else if(isMine){
-        h+='<div class="who">Prenotazione confermata ✓</div><div class="row"><a class="btn" target="_blank" rel="noopener" href="'+waLink(s)+'">Avvisa Alessia su WhatsApp</a></div>';
+        h+='<div class="who">Prenotazione confermata ✓</div>';
+        if(mailFail.indexOf(s.id)>=0)h+='<div class="row"><a class="btn" target="_blank" rel="noopener" href="'+waLink(s)+'">Avvisa Alessia su WhatsApp</a></div>';
+        else h+='<div class="hour">Alessia riceve un avviso automatico.</div>';
       }
       h+='</div>';
     });
@@ -194,6 +199,15 @@ function addSlot(data,ora){
   return db.collection(COLL).add({data:data,ora:ora,stato:"libera",nome:"",prenotataIl:null,creataIl:firebase.firestore.FieldValue.serverTimestamp()});
 }
 
+function notify(s,nome){
+  var d=pd(s.data),quando=GIORNI[d.getDay()]+" "+d.getDate()+" "+MESI[d.getMonth()]+" alle "+oraTxt(s.ora);
+  var now=new Date(),oggi=now.getDate()+"/"+(now.getMonth()+1)+"/"+now.getFullYear()+" "+("0"+now.getHours()).slice(-2)+":"+("0"+now.getMinutes()).slice(-2);
+  if(DEMO||typeof emailjs==="undefined")return Promise.reject(new Error("nomail"));
+  var testo="NUOVA PRENOTAZIONE SCHEDA: "+nome+" ha prenotato "+quando+" (prenotazione fatta il "+oggi+").";
+  return emailjs.send(EJS.service,EJS.template,{to_email:ADMIN_EMAIL,name:"PRENOTAZIONE — "+nome,nome:"PRENOTAZIONE — "+nome+" — "+quando,
+    email:"-",telefono:"-",eta:"-",obiettivo:"-",note:testo,message:testo,data:oggi},{publicKey:EJS.key});
+}
+
 /* ---------- eventi ---------- */
 $("list").addEventListener("click",function(ev){
   var b=ev.target.closest("[data-a]");if(!b||busy)return;
@@ -206,7 +220,11 @@ $("list").addEventListener("click",function(ev){
     if(!isAdmin&&nome.length<2){fmsg("Scrivi il tuo nome.");return;}
     busy=true;b.disabled=true;
     book(id,nome,isAdmin).then(function(){
-      if(!isAdmin){mine.push(id);saveMine();}
+      if(!isAdmin){
+        mine.push(id);saveMine();
+        var sl=find(id)||{id:id,data:"",ora:""};
+        if(sl.data)notify(sl,nome).catch(function(e){console.error(e);if(!DEMO){mailFail.push(id);render();}});
+      }
       openId=null;busy=false;render();
     }).catch(function(e){
       busy=false;
