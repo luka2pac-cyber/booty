@@ -249,7 +249,7 @@ function doLogin(){
   if(DEMO){setAdmin(true);return;}
   $("btn-login").disabled=true;
   auth.signInWithEmailAndPassword(ADMIN_EMAIL,p).then(function(){$("btn-login").disabled=false;$("l-pass").value="";})
-    .catch(function(e){$("btn-login").disabled=false;m.textContent=(e&&e.code==="auth/network-request-failed")?"Errore di connessione. Riprova.":"Password non corretta.";console.error(e);});
+    .catch(function(e){$("btn-login").disabled=false;var c=(e&&e.code)||"errore";m.textContent=(c==="auth/network-request-failed"?"Errore di connessione. Riprova.":(c==="auth/wrong-password"||c==="auth/invalid-credential"||c==="auth/invalid-login-credentials"||c==="auth/user-not-found")?"Password non corretta.":(c==="auth/too-many-requests")?"Troppi tentativi. Riprova tra qualche minuto.":"Accesso non riuscito.")+" ["+c+"]";console.error(e);});
 }
 function setAdmin(v){
   isAdmin=v;openId=null;confirmDel=null;
