@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Alessia (admin): accesso con email e password in Firebase Authentication
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'aletaglionii@gmail.com';
+    }
+
+    // Calendario prenotazioni (prenota.html)
+    match /prenotazioni/{id} {
+      // tutti possono vedere le fasce
+      allow read: if true;
+
+      // solo Alessia aggiunge ed elimina le fasce
+      allow create, delete: if isAdmin();
+
+      // Alessia puo modificare tutto; un'atleta puo solo
+      // trasformare una fascia libera in occupata con il suo nome
+      allow update: if isAdmin() || (
+        resource.data.stato == 'libera'
+        && request.resource.data.stato == 'occupata'
+        && request.resource.data.nome is string
+        && request.resource.data.nome.size() >= 2
+        && request.resource.data.nome.size() <= 60
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['stato', 'nome', 'prenotataIl'])
+      );
+    }
+
+    // tutto il resto resta chiuso
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

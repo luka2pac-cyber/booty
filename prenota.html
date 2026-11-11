@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Booty Builder — Prenota la tua scheda</title>
+<style>
+:root{--wine:#6E1B33;--wine-deep:#4A0F20;--rose:#F7E6EA;--pink:#B8607A;--ink:#2B1A1F;--muted:#8C5A69;--green:#2E7D4F;--white:#fff;--line:#E9CFD6}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--white);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;padding:28px 16px 60px}
+h1{margin:0;text-align:center;color:var(--wine);font-size:clamp(2rem,9vw,2.7rem);font-weight:800;letter-spacing:.02em}
+.sub{margin:8px 0 22px;text-align:center;color:var(--pink);font-size:.82rem;letter-spacing:.32em;text-transform:uppercase}
+.info{background:var(--rose);border-radius:16px;padding:16px 18px;line-height:1.5;font-size:1rem;margin-bottom:22px}
+.week{background:var(--wine);color:#fff;border-radius:999px;padding:11px 20px;font-weight:700;letter-spacing:.12em;font-size:.86rem;text-transform:uppercase;margin:22px 0 10px}
+.slot{padding:16px;border-radius:16px;position:relative}
+.slot:nth-of-type(odd){background:var(--rose)}
+.slot.past{opacity:.5}
+.day{font-weight:700;color:var(--wine);font-size:1.05rem;padding-right:104px}
+.hour{margin-top:6px;font-size:1rem}
+.who{margin-top:6px;font-size:.95rem;color:var(--wine-deep);font-weight:600}
+.pill{position:absolute;top:16px;right:16px;border:2px solid var(--green);color:var(--green);border-radius:999px;padding:5px 14px;font-weight:700;font-size:.86rem;background:transparent}
+.pill.busy{border-color:var(--muted);color:var(--muted)}
+.pill.mine{border-color:var(--wine);color:#fff;background:var(--wine)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button,.btn{font:inherit;cursor:pointer;border-radius:999px;padding:11px 22px;font-weight:700;font-size:.95rem;border:2px solid var(--wine);background:#fff;color:var(--wine);text-decoration:none;display:inline-block;-webkit-tap-highlight-color:transparent}
+button.solid,.btn.solid{background:var(--wine);color:#fff}
+button.ghost{border-color:var(--line);color:var(--muted);font-weight:600}
+button.danger{border-color:#A32B2B;color:#A32B2B}
+button:disabled{opacity:.5;cursor:default}
+input{font:inherit;font-size:16px;width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--wine)}
+label{display:block;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.form{margin-top:12px}
+.empty{text-align:center;color:var(--muted);padding:34px 10px}
+.panel{border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:18px}
+.panel h2{margin:0 0 12px;font-size:1rem;color:var(--wine);text-transform:uppercase;letter-spacing:.1em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid2>div{min-width:0}
+.foot{margin-top:40px;text-align:center}
+.foot button{border:0;background:none;color:var(--muted);font-weight:500;font-size:.85rem;text-decoration:underline;padding:8px}
+.msg{margin-top:10px;font-size:.92rem;color:#A32B2B;min-height:1.2em}
+.msg.ok{color:var(--green)}
+.badge{display:inline-block;background:var(--wine-deep);color:#fff;border-radius:8px;padding:3px 9px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.demo{background:#FFF4D6;color:#6B4E00;border-radius:12px;padding:10px 14px;font-size:.86rem;margin-bottom:16px;text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>BOOTY BUILDER</h1>
+  <div class="sub">Prenota la tua scheda</div>
+
+  <div id="demo-note" class="demo hidden">Anteprima dimostrativa: i dati sono finti e non vengono salvati.</div>
+
+  <div id="admin-bar" class="panel hidden">
+    <h2>Area Alessia <span class="badge">admin</span></h2>
+    <div class="grid2">
+      <div><label for="n-data">Giorno</label><input type="date" id="n-data"></div>
+      <div><label for="n-ora">Ora</label><input type="time" id="n-ora" step="300"></div>
+    </div>
+    <div class="row">
+      <button class="solid" id="btn-add" type="button">Aggiungi fascia</button>
+      <button id="btn-copy" type="button">Copia link per le atlete</button>
+      <button class="ghost" id="btn-out" type="button">Esci</button>
+    </div>
+    <div class="msg" id="adm-msg"></div>
+  </div>
+
+  <div id="info" class="info">Scegli una fascia libera per vederci in sala e guardare insieme la tua nuova scheda. Tocca <b>Prenota</b>, scrivi il tuo nome e conferma: la fascia diventa subito occupata per le altre atlete. Se hai un imprevisto, scrivi ad Alessia.</div>
+
+  <div id="list"><div class="empty">Caricamento…</div></div>
+
+  <div class="foot">
+    <button type="button" id="btn-area">Area Alessia</button>
+    <div id="login" class="panel hidden" style="text-align:left;margin-top:10px">
+      <h2>Accesso Alessia</h2>
+      <label for="l-pass">Password</label>
+      <input type="password" id="l-pass" autocomplete="current-password">
+      <div class="row"><button class="solid" id="btn-login" type="button">Entra</button></div>
+      <div class="msg" id="login-msg"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+'use strict';
+var FB={apiKey:"AIzaSyAWphlte1rpYqTibJlAaZKY4PktfSIGL1A",authDomain:"booty-builder-65217.firebaseapp.com",projectId:"booty-builder-65217",storageBucket:"booty-builder-65217.firebasestorage.app",messagingSenderId:"1091957525590",appId:"1:1091957525590:web:26d80496b8e18fc1953ff7"};
+var ADMIN_EMAIL="aletaglionii@gmail.com";
+var WHATSAPP="393668727005";
+var COLL="prenotazioni";
+var LIVE_HOSTS=["luka2pac-cyber.github.io","sport-fit.org","www.sport-fit.org"];
+
+var qs=new URLSearchParams(location.search);
+var DEMO=qs.get("demo")==="1"||LIVE_HOSTS.indexOf(location.hostname)<0||typeof firebase==="undefined";
+
+var GIORNI=["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"];
+var MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+
+var slots=[],isAdmin=false,openId=null,confirmDel=null,busy=false,db=null,auth=null;
+var mine=[];
+try{mine=JSON.parse(localStorage.getItem("bb_prenotazioni")||"[]");}catch(e){mine=[];}
+function saveMine(){try{localStorage.setItem("bb_prenotazioni",JSON.stringify(mine));}catch(e){}}
+
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function pd(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
+function dt(s){var d=pd(s.data),t=(s.ora||"00:00").split(":");d.setHours(+t[0],+t[1],0,0);return d;}
+function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+function monday(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());var w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);return x;}
+function oraTxt(o){var t=o.split(":");return (+t[0])+":"+t[1];}
+function weekLabel(mon,hasSun){
+  var end=new Date(mon);end.setDate(mon.getDate()+(hasSun?6:5));
+  if(mon.getMonth()===end.getMonth())return mon.getDate()+" – "+end.getDate()+" "+MESI[end.getMonth()];
+  return mon.getDate()+" "+MESI[mon.getMonth()]+" – "+end.getDate()+" "+MESI[end.getMonth()];
+}
+
+function render(){
+  var now=new Date(),list=$("list"),oldF=$("f-nome"),keep=oldF?oldF.value:"";
+  var vis=slots.slice().sort(function(a,b){return dt(a)-dt(b);});
+  if(!isAdmin)vis=vis.filter(function(s){return dt(s)>now;});
+  if(!vis.length){list.innerHTML='<div class="empty">'+(isAdmin?"Nessuna fascia inserita. Aggiungine una qui sopra.":"Al momento non ci sono fasce disponibili.")+'</div>';return;}
+  var weeks={},order=[];
+  vis.forEach(function(s){var k=iso(monday(pd(s.data)));if(!weeks[k]){weeks[k]=[];order.push(k);}weeks[k].push(s);});
+  var h="";
+  order.forEach(function(k){
+    var arr=weeks[k],hasSun=arr.some(function(s){return pd(s.data).getDay()===0;});
+    h+='<div class="week">'+esc(weekLabel(pd(k),hasSun))+'</div><div>';
+    arr.forEach(function(s){
+      var d=pd(s.data),past=dt(s)<=now,busyS=s.stato==="occupata",isMine=mine.indexOf(s.id)>=0;
+      h+='<div class="slot'+(past?" past":"")+'">';
+      h+='<div class="day">'+GIORNI[d.getDay()]+" "+d.getDate()+" "+MESI[d.getMonth()]+'</div>';
+      h+='<div class="hour">ore '+esc(oraTxt(s.ora))+'</div>';
+      if(busyS&&isMine&&!isAdmin)h+='<span class="pill mine">Tua</span>';
+      else h+='<span class="pill'+(busyS?" busy":"")+'">'+(busyS?"Occupata":"Libera")+'</span>';
+      if(isAdmin){
+        if(busyS)h+='<div class="who">'+(s.nome?esc(s.nome):"Segnata occupata da Alessia")+'</div>';
+        h+='<div class="row">';
+        if(busyS)h+='<button type="button" data-a="free" data-id="'+esc(s.id)+'">Annulla prenotazione</button>';
+        else h+='<button type="button" data-a="open" data-id="'+esc(s.id)+'">Segna occupata</button>';
+        if(confirmDel===s.id)h+='<button type="button" class="danger" data-a="del2" data-id="'+esc(s.id)+'">Confermi? Elimina</button>';
+        else h+='<button type="button" class="ghost" data-a="del" data-id="'+esc(s.id)+'">Elimina</button>';
+        h+='</div>';
+        if(openId===s.id&&!busyS)h+=formHtml(s.id,"Nome (facoltativo)","Segna occupata");
+      }else if(!busyS){
+        if(openId===s.id)h+=formHtml(s.id,"Il tuo nome","Conferma");
+        else h+='<div class="row"><button type="button" data-a="open" data-id="'+esc(s.id)+'">Prenota</button></div>';
+      }else if(isMine){
+        h+='<div class="who">Prenotazione confermata ✓</div><div class="row"><a class="btn" target="_blank" rel="noopener" href="'+waLink(s)+'">Avvisa Alessia su WhatsApp</a></div>';
+      }
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  list.innerHTML=h;
+  var f=$("f-nome");if(f){f.value=keep;f.focus();}
+}
+function formHtml(id,lab,ok){
+  return '<div class="form"><label for="f-nome">'+lab+'</label><input id="f-nome" type="text" maxlength="60" autocomplete="name">'+
+    '<div class="row"><button type="button" class="solid" data-a="ok" data-id="'+esc(id)+'">'+ok+'</button><button type="button" class="ghost" data-a="close">Indietro</button></div>'+
+    '<div class="msg" id="f-msg"></div></div>';
+}
+function waLink(s){var d=pd(s.data);return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Ciao Alessia, ho prenotato la fascia di "+GIORNI[d.getDay()].toLowerCase()+" "+d.getDate()+" "+MESI[d.getMonth()]+" alle "+oraTxt(s.ora)+".");}
+function find(id){for(var i=0;i<slots.length;i++)if(slots[i].id===id)return slots[i];return null;}
+function fmsg(t){var m=$("f-msg");if(m)m.textContent=t;}
+function amsg(t,ok){var m=$("adm-msg");m.textContent=t;m.className="msg"+(ok?" ok":"");}
+
+/* ---------- operazioni dati ---------- */
+function book(id,nome,byAdmin){
+  if(DEMO){var s=find(id);if(!s||s.stato!=="libera")return Promise.reject(new Error("taken"));s.stato="occupata";s.nome=nome;return Promise.resolve();}
+  var ref=db.collection(COLL).doc(id);
+  return db.runTransaction(function(tx){
+    return tx.get(ref).then(function(doc){
+      if(!doc.exists||doc.data().stato!=="libera")throw new Error("taken");
+      tx.update(ref,{stato:"occupata",nome:nome,prenotataIl:firebase.firestore.FieldValue.serverTimestamp()});
+    });
+  });
+}
+function freeSlot(id){
+  if(DEMO){var s=find(id);if(s){s.stato="libera";s.nome="";}return Promise.resolve();}
+  return db.collection(COLL).doc(id).update({stato:"libera",nome:"",prenotataIl:null});
+}
+function delSlot(id){
+  if(DEMO){slots=slots.filter(function(s){return s.id!==id;});return Promise.resolve();}
+  return db.collection(COLL).doc(id).delete();
+}
+function addSlot(data,ora){
+  if(slots.some(function(s){return s.data===data&&s.ora===ora;}))return Promise.reject(new Error("dup"));
+  if(DEMO){slots.push({id:"d"+Date.now(),data:data,ora:ora,stato:"libera",nome:""});return Promise.resolve();}
+  return db.collection(COLL).add({data:data,ora:ora,stato:"libera",nome:"",prenotataIl:null,creataIl:firebase.firestore.FieldValue.serverTimestamp()});
+}
+
+/* ---------- eventi ---------- */
+$("list").addEventListener("click",function(ev){
+  var b=ev.target.closest("[data-a]");if(!b||busy)return;
+  var a=b.getAttribute("data-a"),id=b.getAttribute("data-id");
+  if(a==="open"){openId=id;confirmDel=null;render();return;}
+  if(a==="close"){openId=null;render();return;}
+  if(a==="del"){confirmDel=id;openId=null;render();return;}
+  if(a==="ok"){
+    var nome=($("f-nome").value||"").trim();
+    if(!isAdmin&&nome.length<2){fmsg("Scrivi il tuo nome.");return;}
+    busy=true;b.disabled=true;
+    book(id,nome,isAdmin).then(function(){
+      if(!isAdmin){mine.push(id);saveMine();}
+      openId=null;busy=false;render();
+    }).catch(function(e){
+      busy=false;
+      if(e&&e.message==="taken"){openId=null;render();alertTaken();}
+      else{b.disabled=false;fmsg("Errore di connessione. Riprova.");console.error(e);}
+    });
+    return;
+  }
+  if(a==="free"||a==="del2"){
+    busy=true;b.disabled=true;
+    (a==="free"?freeSlot(id):delSlot(id)).then(function(){busy=false;confirmDel=null;render();})
+      .catch(function(e){busy=false;amsg("Operazione non riuscita. Riprova.");console.error(e);render();});
+  }
+});
+function alertTaken(){
+  var l=$("list"),n=document.createElement("div");n.className="demo";n.textContent="Questa fascia è appena stata prenotata da un'altra atleta. Scegline un'altra.";
+  l.insertBefore(n,l.firstChild);setTimeout(function(){if(n.parentNode)n.parentNode.removeChild(n);},6000);
+}
+$("btn-add").addEventListener("click",function(){
+  var d=$("n-data").value,o=$("n-ora").value;
+  if(!d||!o){amsg("Scegli giorno e ora.");return;}
+  o=o.slice(0,5);
+  addSlot(d,o).then(function(){amsg("Fascia aggiunta.",true);$("n-ora").value="";render();})
+    .catch(function(e){amsg(e&&e.message==="dup"?"Questa fascia esiste già.":"Operazione non riuscita. Riprova.");console.error(e);});
+});
+$("btn-copy").addEventListener("click",function(){
+  var url=location.origin+location.pathname;
+  function done(){amsg("Link copiato: "+url,true);}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(done,function(){amsg(url,true);});
+  else amsg(url,true);
+});
+$("btn-area").addEventListener("click",function(){$("login").classList.toggle("hidden");if(!$("login").classList.contains("hidden"))$("l-pass").focus();});
+$("btn-login").addEventListener("click",doLogin);
+$("l-pass").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
+$("btn-out").addEventListener("click",function(){if(DEMO){setAdmin(false);return;}auth.signOut();});
+
+function doLogin(){
+  var p=$("l-pass").value,m=$("login-msg");m.textContent="";
+  if(!p){m.textContent="Inserisci la password.";return;}
+  if(DEMO){setAdmin(true);return;}
+  $("btn-login").disabled=true;
+  auth.signInWithEmailAndPassword(ADMIN_EMAIL,p).then(function(){$("btn-login").disabled=false;$("l-pass").value="";})
+    .catch(function(e){$("btn-login").disabled=false;m.textContent=(e&&e.code==="auth/network-request-failed")?"Errore di connessione. Riprova.":"Password non corretta.";console.error(e);});
+}
+function setAdmin(v){
+  isAdmin=v;openId=null;confirmDel=null;
+  $("admin-bar").classList.toggle("hidden",!v);
+  $("info").classList.toggle("hidden",v);
+  $("btn-area").classList.toggle("hidden",v);
+  $("login").classList.add("hidden");
+  render();
+}
+
+/* ---------- avvio ---------- */
+if(DEMO){
+  $("demo-note").classList.remove("hidden");
+  var m0=monday(new Date());function dd(n){var x=new Date(m0);x.setDate(m0.getDate()+n);return iso(x);}
+  slots=[
+    {id:"a",data:dd(8),ora:"18:30",stato:"libera",nome:""},
+    {id:"b",data:dd(11),ora:"19:00",stato:"occupata",nome:"Giulia"},
+    {id:"c",data:dd(12),ora:"09:30",stato:"libera",nome:""},
+    {id:"d",data:dd(15),ora:"18:30",stato:"libera",nome:""},
+    {id:"e",data:dd(18),ora:"19:00",stato:"libera",nome:""}
+  ];
+  render();
+}else{
+  try{
+    firebase.initializeApp(FB);db=firebase.firestore();auth=firebase.auth();
+    auth.onAuthStateChanged(function(u){setAdmin(!!(u&&u.email&&u.email.toLowerCase()===ADMIN_EMAIL));});
+    db.collection(COLL).onSnapshot(function(snap){
+      slots=snap.docs.map(function(d){var x=d.data();return{id:d.id,data:x.data,ora:x.ora,stato:x.stato,nome:x.nome||""};})
+        .filter(function(s){return /^\d{4}-\d{2}-\d{2}$/.test(s.data||"")&&/^\d{2}:\d{2}$/.test(s.ora||"");});
+      if(!busy)render();
+    },function(e){console.error(e);$("list").innerHTML='<div class="empty">Calendario non disponibile al momento. Riprova più tardi.</div>';});
+  }catch(e){console.error(e);$("list").innerHTML='<div class="empty">Calendario non disponibile al momento.</div>';}
+  setInterval(function(){if(!busy&&!openId)render();},60000);
+}
+})();
+</script>
+</body>
+</html>
