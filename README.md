@@ -10,6 +10,7 @@ File:
 - `bb-home-blok.html` — solo la home, come inviata da Alessia (v9-F). Da inserire in `index.html` tra `<!-- ===== NUOVA HOME` e `<!-- ===== NUOVA HOME — fine ===== -->`, mantenendo la sezione `id="s-login"` (Area personale).
 - `elementor-app.html` — app completa da incollare in Elementor (metodo attuale, finche non si passa all iframe).
 - `prenota.html` — calendario prenotazioni (pagina separata): https://luka2pac-cyber.github.io/booty/prenota.html — le atlete prenotano una fascia, Alessia entra da "Area Alessia" con la password. Dati in Firestore, raccolta `prenotazioni`.
+- `prenotazioni-script.gs` — script Google Apps Script (account di Alessia): a ogni prenotazione crea l'evento in Google Calendar (60 min, titolo = nome) e manda una email semplice. L'indirizzo della web app va in `SCRIPT_URL` dentro `prenota.html`. Il questionario (EmailJS in `index.html`) non c'entra e non va toccato.
 - `firestore.rules` — regole Firestore da incollare nella console Firebase (Firestore > Rules).
 - `elementor-iframe.html` — codice da incollare UNA volta nel widget HTML di Elementor.
 
