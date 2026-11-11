@@ -14,3 +14,13 @@ File:
 - `elementor-iframe.html` — codice da incollare UNA volta nel widget HTML di Elementor.
 
 ID da non rimuovere mai nella home: `bb-home`, `bb-root`, `s-login`, `l-email`, `l-pass`, `btn-login`, `btn-demo`, `btn-public-quiz`.
+
+## Impostazione calendario prenotazioni (una sola volta)
+
+Aprire questi link con l'account Google della palestra, in ordine:
+
+1. **Attiva accesso con password:** https://console.firebase.google.com/project/booty-builder-65217/authentication/providers
+2. **Crea l'utente di Alessia:** https://console.firebase.google.com/project/booty-builder-65217/authentication/users
+3. **Regole Firestore:** https://console.firebase.google.com/project/booty-builder-65217/firestore/rules
+   — il testo da incollare e nel file [firestore.rules](firestore.rules)
+4. **Prova la pagina:** https://luka2pac-cyber.github.io/booty/prenota.html
