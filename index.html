@@ -483,6 +483,14 @@ html, body {
 .bb .logo span{font-family:'Manrope',sans-serif;font-weight:500;font-size:13.5px;color:var(--muted);margin-left:10px}
 .bb .me{text-decoration:none;color:var(--white);background:var(--wine);padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px}
 .bb .me:hover{background:var(--wine-deep);color:var(--white)}
+/* selettore lingua IT / EN */
+.bb .top-r{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.bb .lang{display:inline-flex;border:1.5px solid var(--wine);border-radius:999px;overflow:hidden}
+.bb .lang-b{appearance:none;-webkit-appearance:none;border:0;margin:0;background:transparent;color:var(--wine);font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;line-height:1;padding:9px 11px;min-height:36px;cursor:pointer;box-shadow:none;text-transform:none;border-radius:0}
+.bb .lang-b:hover{background:var(--cipria);color:var(--wine-deep)}
+.bb .lang-b[aria-pressed="true"]{background:var(--wine);color:var(--white)}
+.bb .logo{white-space:nowrap}
+@media (max-width:600px){ .bb .logo{font-size:20px} .bb .top-r{gap:7px} .bb .me{padding:9px 12px;font-size:13.5px;white-space:nowrap} .bb .lang-b{padding:8px 9px;font-size:12.5px} }
 
 /* apertura con foto */
 .bb .hero{position:relative;min-height:74vh;display:flex;align-items:center;overflow:hidden;background:var(--wine-deep)}
@@ -726,7 +734,13 @@ html, body {
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#bb-root">Booty Builder<span>di Alessia Taglioni</span></a>
-    <a class="me js-goto-login" href="#s-login">Area personale</a>
+    <div class="top-r">
+      <div class="lang" role="group" aria-label="Lingua / Language">
+        <button type="button" class="lang-b" data-lang="it" aria-pressed="true" lang="it">IT</button>
+        <button type="button" class="lang-b" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <a class="me js-goto-login" href="#s-login">Area personale</a>
+    </div>
   </div>
 </header>
 
@@ -1089,6 +1103,118 @@ html, body {
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fitTitle); }
   setTimeout(function(){ fitTitle(); setupTabs(); setupReveal(); setupSticky(); }, 900);
   window.addEventListener('load', function(){ fitTitle(); setupTabs(); setupReveal(); setupSticky(); });
+})();
+</script>
+<script>
+/* ===== Lingua IT / EN della home =====
+   Il testo italiano resta nell'HTML. Qui c'e' solo la versione inglese:
+   [selettore, posizione (0 = primo), testo inglese]  oppure  [selettore, posizione, testo, attributo].
+   Per cambiare una traduzione basta modificare il testo qui sotto. */
+(function(){
+  var EN = [
+    ['.logo span', 0, 'by Alessia Taglioni'],
+    ['.top .me', 0, 'Personal area'],
+    ['.hero-media img', 0, 'Alessia Taglioni at the gym', 'alt'],
+    ['.hero h1', 0, 'A training program built around you'],
+    ['.hero .sub-main', 0, '<strong>8 weeks</strong> of programming with a <strong>focus on the glutes</strong>, within a workout that trains <strong>the whole body</strong> in a balanced, proportionate way.'],
+    ['#btn-public-quiz', 0, 'Fill in the questionnaire'],
+    ['.hero .btn-wa', 0, 'Message me on WhatsApp', 'aria-label'],
+    ['.hero .btn-wa', 0, 'Message me on WhatsApp', 'title'],
+    ['.hero .who', 0, 'Alessia Taglioni, personal trainer — ASD Sport Fit, Gorizia'],
+    ['.tabs', 0, 'Program sections', 'aria-label'],
+    ['.tab', 0, 'The method'],
+    ['.tab', 1, 'How it works'],
+    ['.tab', 2, 'The 8 weeks'],
+    ['.tab', 3, "What's included"],
+    ['#bb-panel-1 .panel-title', 0, 'Results, motivation and balance'],
+    ['.m-lead', 0, 'Booty Builder was created with one clear goal: to help you achieve <strong>the best possible results</strong> in the healthiest, most balanced way.'],
+    ['.pillars h3', 0, 'Constant motivation'],
+    ['.pillars p', 0, 'Clear goals, measurable progress and someone always there for you are <strong>what keeps you consistent</strong>, even during the busiest periods.'],
+    ['.pillars h3', 1, 'Optimised results'],
+    ['.pillars p', 1, 'Every set, rep and rest period follows a reason, so that <strong>each workout builds on the one before</strong>.'],
+    ['.pillars h3', 2, 'Mental well-being'],
+    ['.pillars p', 2, 'Learning to <strong>measure progress beyond the number on the scale</strong> changes your relationship with your body, not just your physique.'],
+    ['#bb-cert', 0, 'Enlarge the certificate', 'aria-label'],
+    ['#bb-cert img', 0, 'National Certificate: Alessia Taglioni, Fitness and Bodybuilding Instructor', 'alt'],
+    ['.met-cred p', 0, '<span class="met-k">Qualification</span><strong>Fitness and Bodybuilding Instructor</strong><span class="met-s">National Certificate</span><span class="met-h">Tap the certificate to enlarge it</span>'],
+    ['#bb-panel-2 .panel-title', 0, 'How it works'],
+    ['#bb-panel-2 .lede', 0, 'From the initial questionnaire to the final week, the program unfolds in four stages.'],
+    ['.steps h3', 0, 'Initial assessment'],
+    ['.steps p', 0, 'A questionnaire covering your <strong>goals, experience, weekly availability, injuries and limitations</strong>. It is the foundation of your program.'],
+    ['.steps h3', 1, 'Program delivery'],
+    ['.steps p', 1, '8 weeks on the days you choose, with <strong>sets, reps, rest times and alternative exercises</strong>. A focus on the glutes within <strong>full-body training</strong>, balanced and proportionate.'],
+    ['.steps h3', 2, '1:1 gym session'],
+    ['.steps p', 2, '<strong>We go through the entire program together</strong>, one set per exercise: technique, breathing, machines and starting weights. It is <strong>the whole program demonstrated 1:1</strong>, in person at the gym.'],
+    ['.steps h3', 3, 'Ongoing support'],
+    ['.steps p', 3, '<strong>I am available on WhatsApp</strong> until the end of the cycle: questions about weights, videos to correct, unexpected changes.'],
+    ['#bb-panel-3 .panel-title', 0, 'The 8 weeks'],
+    ['.phases .when', 0, 'Weeks 1 and 2'],
+    ['.phases h3', 0, 'Learning'],
+    ['.phases article > p:not(.when)', 0, 'You get familiar with the exercises and find the right weights. The priority is <strong>quality of execution</strong>.'],
+    ['.phases .when', 1, 'Weeks 3 to 6'],
+    ['.phases h3', 1, 'Progression'],
+    ['.phases article > p:not(.when)', 1, 'Weights and volume increase gradually. This is the stage where <strong>the first results show</strong>.'],
+    ['.phases .when', 2, 'Weeks 7 and 8'],
+    ['.phases h3', 2, 'Intensification'],
+    ['.phases article > p:not(.when)', 2, 'The cycle reaches its peak. At the end <strong>we review your progress</strong> and plan what comes next.'],
+    ['.incl-title', 0, "What's included in the program"],
+    ['.incl li > span:last-child', 0, '<strong>8-week program</strong> with progression and alternative exercises.'],
+    ['.incl li > span:last-child', 1, '<strong>1:1 demonstration session at the gym</strong>, with the whole program shown live.'],
+    ['.incl li > span:last-child', 2, '<strong>Ongoing WhatsApp support</strong> for questions, weights and unexpected changes.'],
+    ['.incl li > span:last-child', 3, '<strong>Exercise videos on request</strong> for the less intuitive movements.'],
+    ['.incl li > span:last-child', 4, '<strong>In-person refresher</strong>, to go over an exercise together when needed.'],
+    ['.incl li > span:last-child', 5, '<strong>Remote technique correction</strong> from your exercise videos.'],
+    ['.incl li > span:last-child', 6, '<strong>Adjustments along the way</strong> if your schedule or equipment changes.'],
+    ['.incl li > span:last-child', 7, '<strong>Final review of the cycle</strong> and planning of the next program.'],
+    ['.note', 0, 'The in-person part is the initial demonstration session: the program does <u class="not">not</u> include recurring one-to-one sessions.'],
+    ['.cta h2', 0, 'You are your best investment'],
+    ['.cta p', 0, 'The first step is the initial questionnaire, which takes just a few minutes. Or you can contact me on WhatsApp: <strong>together we will find the program that best suits your goals</strong>, with no commitment.'],
+    ['.cta .js-quiz', 0, 'Fill in the questionnaire'],
+    ['.cta .btn-wa', 0, 'Contact me on WhatsApp', 'aria-label'],
+    ['.cta .btn-wa', 0, 'Contact me on WhatsApp', 'title'],
+    ['.cta .btn-wa span', 0, 'Contact me on WhatsApp'],
+    ['#s-login h2', 0, 'Personal area'],
+    ['#s-login .lede', 0, "If you have already started the program, this is where you access your plan — always available, even on your phone during your workout."],
+    ['#btn-login', 0, 'Log in'],
+    ['#btn-demo', 0, 'View a preview of the personal area'],
+    ['.foot .js-goto-login', 0, 'Personal area'],
+    ['#bb-sticky .js-quiz', 0, 'Fill in the questionnaire']
+  ];
+  var KEY = 'bb-lang';
+  function el(q, n){ var r = document.getElementById('bb-root'); if (!r) return null; var l = r.querySelectorAll(q); return l[n] || null; }
+  function setLang(lang){
+    var root = document.getElementById('bb-root');
+    if (!root) return;
+    var i, t, e, a;
+    for (i = 0; i < EN.length; i++) {
+      t = EN[i]; e = el(t[0], t[1]); if (!e) continue;
+      a = t[3];
+      /* salva l'italiano la prima volta */
+      if (a) { if (!e.hasAttribute('data-it-' + a)) e.setAttribute('data-it-' + a, e.getAttribute(a) || ''); }
+      else if (e.__itHtml === undefined) e.__itHtml = e.innerHTML;
+      if (a) e.setAttribute(a, lang === 'en' ? t[2] : e.getAttribute('data-it-' + a));
+      else e.innerHTML = (lang === 'en') ? t[2] : e.__itHtml;
+    }
+    /* il testo "Non disponi ancora delle credenziali?" sta prima del pulsante demo */
+    var demo = root.querySelector('.demo');
+    if (demo && demo.firstChild && demo.firstChild.nodeType === 3) {
+      if (demo.__it === undefined) demo.__it = demo.firstChild.nodeValue;
+      demo.firstChild.nodeValue = (lang === 'en') ? "Don't have your login details yet? " : demo.__it;
+    }
+    var bs = root.querySelectorAll('.lang-b');
+    for (i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', bs[i].getAttribute('data-lang') === lang ? 'true' : 'false');
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem(KEY, lang); } catch (x) {}
+    /* il titolo grande si riadatta alla nuova lunghezza */
+    try { window.dispatchEvent(new Event('resize')); } catch (x) {}
+  }
+  document.addEventListener('click', function(ev){
+    var b = ev.target && ev.target.closest ? ev.target.closest('#bb-root .lang-b') : null;
+    if (b) { ev.preventDefault(); setLang(b.getAttribute('data-lang')); }
+  });
+  var saved = 'it';
+  try { saved = localStorage.getItem(KEY) || 'it'; } catch (x) {}
+  if (saved === 'en') setLang('en');
 })();
 </script>
 <!-- ===== fine Booty Builder — Home v9 "Tre colori" ===== -->
