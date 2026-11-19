@@ -727,6 +727,138 @@ html, body {
 .bb .hero h1{white-space:nowrap;max-width:none;font-weight:800;letter-spacing:0;font-size:clamp(11px,3.3vw,34px)}
 .bb .hero-inner{width:100%}
 @media (max-width:600px){ .bb .hero h1{margin-left:-12px;margin-right:-12px;letter-spacing:-.01em} }
+
+/* ===== RESTYLING (proposta 6, approvata) ===== */
+/* ===== EMOJI (comune a tutte e tre le versioni) ===== */
+.bb .tab::before{margin-right:8px;font-size:1.15em;line-height:1}
+.bb #bb-tab-1::before{content:"💎"}
+.bb #bb-tab-2::before{content:"🗺️"}
+.bb #bb-tab-3::before{content:"📅"}
+.bb #bb-tab-4::before{content:"🎁"}
+
+.bb .pillars .ico svg{display:none}
+.bb .pillars .ico::before{font-size:30px;line-height:1}
+.bb .pillars article:nth-child(1) .ico::before{content:"🔥"}
+.bb .pillars article:nth-child(2) .ico::before{content:"📈"}
+.bb .pillars article:nth-child(3) .ico::before{content:"🧘‍♀️"}
+
+.bb .steps li{position:relative}
+.bb .steps li::after{position:absolute;top:20px;right:20px;font-size:30px;line-height:1}
+.bb .steps li:nth-child(1)::after{content:"📝"}
+.bb .steps li:nth-child(2)::after{content:"📲"}
+.bb .steps li:nth-child(3)::after{content:"🏋️‍♀️"}
+.bb .steps li:nth-child(4)::after{content:"💬"}
+
+.bb .phases h3::after{margin-left:10px}
+.bb .phases article:nth-child(1) h3::after{content:"🌱"}
+.bb .phases article:nth-child(2) h3::after{content:"💪"}
+.bb .phases article:nth-child(3) h3::after{content:"🚀"}
+
+.bb .incl .tick{background:transparent;width:24px;height:24px;margin-top:1px}
+.bb .incl .tick svg{display:none}
+.bb .incl .tick::before{font-size:19px;line-height:1}
+.bb .incl li:nth-child(1) .tick::before{content:"🗓️"}
+.bb .incl li:nth-child(2) .tick::before{content:"🏋️‍♀️"}
+.bb .incl li:nth-child(3) .tick::before{content:"💬"}
+.bb .incl li:nth-child(4) .tick::before{content:"🎥"}
+.bb .incl li:nth-child(5) .tick::before{content:"🔁"}
+.bb .incl li:nth-child(6) .tick::before{content:"🎯"}
+.bb .incl li:nth-child(7) .tick::before{content:"🛠️"}
+.bb .incl li:nth-child(8) .tick::before{content:"🏁"}
+
+.bb .cta h2::after{content:" ✨"}
+.bb .sechead h2::before{content:"🔐 "}
+
+/* chip / ticker (markup aggiunto) */
+.bb .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+.bb .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;font-size:14.5px;font-weight:700;line-height:1}
+@media (max-width:600px){.bb .chip{font-size:13.5px;padding:8px 13px}}
+/* ===== VERSIONE 1 — "GLOW": morbida, luminosa, in movimento ===== */
+@keyframes bbFloat{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+@keyframes bbShine{0%{left:-60%}60%,100%{left:130%}}
+@keyframes bbHue{0%,100%{opacity:.55}50%{opacity:.9}}
+
+/* hero: luce rosa che "respira" + emoji fluttuanti */
+.bb .hero-veil{background:
+  radial-gradient(60% 50% at 20% 25%,rgba(247,230,225,.28),transparent 70%),
+  radial-gradient(55% 45% at 85% 80%,rgba(110,27,51,.75),transparent 70%),
+  linear-gradient(180deg,rgba(74,15,32,.5) 0%,rgba(74,15,32,.72) 60%,rgba(74,15,32,.9) 100%)}
+.bb .hero-veil::after{content:"";position:absolute;inset:0;background:radial-gradient(40% 35% at 50% 40%,rgba(247,230,225,.22),transparent 70%);animation:bbHue 5s ease-in-out infinite}
+.bb .float{position:absolute;font-size:clamp(30px,4vw,52px);filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));animation:bbFloat 6s ease-in-out infinite;pointer-events:none;z-index:1}
+.bb .float.f1{top:14%;left:8%}
+.bb .float.f2{top:20%;right:9%;animation-delay:-2s}
+.bb .float.f3{bottom:14%;left:14%;animation-delay:-4s}
+.bb .float.f4{bottom:20%;right:13%;animation-delay:-1s}
+@media (max-width:600px){.bb .float.f2,.bb .float.f3{display:none}.bb .float.f1{top:3%;left:4%;font-size:28px}.bb .float.f4{bottom:3%;right:5%;font-size:28px}}
+.bb .hero-inner{z-index:2}
+.bb .chip{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+/* pulsante con riflesso che passa */
+.bb .btn-light{position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(247,230,225,.35)}
+.bb .btn-light::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);transform:skewX(-20deg);animation:bbShine 3.2s ease-in-out infinite}
+.bb .btn{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.bb .btn:hover{transform:translateY(-2px)}
+
+/* sezione chiara con macchie di colore */
+.bb .sec.b{background:
+  radial-gradient(40% 30% at 0% 0%,rgba(247,230,225,.9),transparent 70%),
+  radial-gradient(40% 30% at 100% 100%,rgba(247,230,225,.9),transparent 70%),#fff}
+
+/* pulsanti-scheda: barra unica tipo app */
+.bb .tabs{background:#fff;padding:8px;border-radius:999px;box-shadow:0 14px 40px rgba(74,15,32,.14);width:max-content;max-width:100%}
+.bb .tab{border-color:transparent;transition:all .25s ease}
+.bb .tab[aria-selected="true"]{background:linear-gradient(135deg,#6E1B33,#4A0F20);box-shadow:0 8px 22px rgba(110,27,51,.4)}
+@media (max-width:600px){.bb .tabs{width:auto;border-radius:24px}}
+
+/* riquadri che si alzano */
+.bb .pillars article{transition:transform .3s ease,box-shadow .3s ease;border:2px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#6E1B33,#F7E6E1 50%,#6E1B33) border-box}
+.bb .pillars article:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(74,15,32,.2)}
+.bb .pillars .ico{background:linear-gradient(135deg,#F7E6E1,#fff);box-shadow:0 0 0 7px #fff,0 10px 24px rgba(110,27,51,.25)}
+.bb .steps li{background:#fff;box-shadow:0 14px 36px rgba(74,15,32,.1);transition:transform .3s ease}
+.bb .steps li:hover{transform:translateY(-6px)}
+.bb .steps li::before{background:linear-gradient(135deg,#6E1B33,#4A0F20)}
+.bb .phases::before{background:linear-gradient(#6E1B33,#F7E6E1)}
+.bb .phases article{background:#fff;border-radius:20px;padding:20px 22px 20px 52px;margin-bottom:14px;box-shadow:0 10px 28px rgba(74,15,32,.08)}
+.bb .phases article::before{left:5px;top:24px}
+.bb .incl-block{background:#fff;box-shadow:0 20px 50px rgba(74,15,32,.12)}
+.bb .incl li{background:#F7E6E1;border-radius:14px;padding:12px 14px}
+.bb .cta h2{background:linear-gradient(90deg,#fff,#F7E6E1,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion: reduce){.bb .float,.bb .btn-light::after,.bb .hero-veil::after{animation:none}}
+/* ===== VERSIONE 4 — mix 1 + 3 (richiesta di Alessia) ===== */
+/* zavihki: brez emojijev, pallino bordeaux ben definito */
+.bb #bb-tab-1::before,.bb #bb-tab-2::before,.bb #bb-tab-3::before,.bb #bb-tab-4::before{content:""}
+.bb .tab::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;background:#6E1B33;margin-right:10px;flex:0 0 auto;box-shadow:0 0 0 3px rgba(110,27,51,.14)}
+.bb .tab[aria-selected="true"]::before{background:#F7E6E1;box-shadow:0 0 0 3px rgba(247,230,225,.3)}
+
+/* tre riquadri: bordeaux con contorno fluorescente (dalla 3) */
+@keyframes bbNeon{0%,100%{box-shadow:0 0 0 1px #FF5C93,0 0 14px rgba(255,92,147,.55),0 0 34px rgba(255,92,147,.28),0 22px 50px rgba(74,15,32,.35)}
+  50%{box-shadow:0 0 0 1px #FF7AA8,0 0 20px rgba(255,92,147,.75),0 0 48px rgba(255,92,147,.4),0 22px 50px rgba(74,15,32,.35)}}
+.bb .pillars article{background:linear-gradient(160deg,#6E1B33 0%,#4A0F20 100%) padding-box,linear-gradient(#FF5C93,#FF5C93) border-box;border:1.5px solid transparent;color:rgba(255,255,255,.88);animation:bbNeon 3.2s ease-in-out infinite}
+.bb .pillars article:hover{transform:translateY(-8px)}
+.bb .pillars h3{color:#F7E6E1}
+.bb .pillars p{color:rgba(255,255,255,.86)}
+.bb .pillars strong{color:#fff;background:none}
+.bb .pillars .ico{background:radial-gradient(circle at 30% 30%,#8A2A45,#4A0F20);box-shadow:0 0 0 6px #fff,0 0 0 7.5px #FF5C93,0 0 26px rgba(255,92,147,.6)}
+@media (prefers-reduced-motion: reduce){.bb .pillars article{animation:none;box-shadow:0 0 0 1px #FF5C93,0 0 18px rgba(255,92,147,.6)}}
+/* ===== VERSIONE 5 — come la 4, ma nei pulsanti la pesca al posto del pallino ===== */
+.bb .tab::before{width:20px;height:20px;border-radius:0;box-shadow:none;background:#6E1B33;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.6 5.9c1.7-1.6 4.4-1.6 6.1-.1 2 1.8 2.4 5 1 7.8-1.5 3-4.5 5-7.7 5s-6.2-2-7.7-5c-1.4-2.8-1-6 1-7.8 1.7-1.5 4.4-1.5 6.1.1Z'/%3E%3Cpath d='M12.4 5.6c.1-1.9 1.6-3.4 3.5-3.6.1 1.9-1.4 3.5-3.3 3.7Z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.6 5.9c1.7-1.6 4.4-1.6 6.1-.1 2 1.8 2.4 5 1 7.8-1.5 3-4.5 5-7.7 5s-6.2-2-7.7-5c-1.4-2.8-1-6 1-7.8 1.7-1.5 4.4-1.5 6.1.1Z'/%3E%3Cpath d='M12.4 5.6c.1-1.9 1.6-3.4 3.5-3.6.1 1.9-1.4 3.5-3.3 3.7Z'/%3E%3C/svg%3E") center/contain no-repeat}
+.bb .tab[aria-selected="true"]::before{background:#F7E6E1;box-shadow:none}
+/* ===== VERSIONE 6 — da proposta 5, modifiche di Alessia ===== */
+/* niente chip con emoji sopra "Compila il questionario" */
+.bb .chips{display:none}
+/* niente pesca colorata in alto */
+.bb .float.f1{display:none}
+/* pulsanti piu grandi, con pallino bordeaux semplice */
+.bb .tab{min-height:62px;padding:0 32px;font-size:18px}
+.bb .tab::before{width:12px;height:12px;border-radius:50%;background:#6E1B33;box-shadow:none;-webkit-mask:none;mask:none;margin-right:12px}
+.bb .tab[aria-selected="true"]::before{background:#F7E6E1;box-shadow:none}
+.bb .tabs{padding:10px}
+@media (max-width:600px){.bb .tab{min-height:60px;padding:0 8px;font-size:15.5px;white-space:nowrap}.bb .tab::before{width:10px;height:10px;margin-right:9px}}
+/* senza Area personale */
+.bb #s-login,.bb .top .me,.bb .foot .js-goto-login{display:none}
+
 </style>
 
 <div class="bb" id="bb-root">
@@ -746,7 +878,7 @@ html, body {
 
 <section class="hero" id="bb-hero">
   <div class="hero-media"><img src="https://sport-fit.org/wp-content/uploads/2026/07/file_00000000835082439736c27383ab22c8.png" alt="Alessia Taglioni in palestra"></div>
-  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div><span class="float f2" aria-hidden="true">💪</span><span class="float f3" aria-hidden="true">🔥</span><span class="float f4" aria-hidden="true">✨</span>
   <div class="wrap hero-inner">
     <p class="kicker"><svg class="peach" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.6 5.9c1.7-1.6 4.4-1.6 6.1-.1 2 1.8 2.4 5 1 7.8-1.5 3-4.5 5-7.7 5s-6.2-2-7.7-5c-1.4-2.8-1-6 1-7.8 1.7-1.5 4.4-1.5 6.1.1Z" fill="currentColor"/><path d="M12.3 8.4c-.5 3.1-.5 6.3 0 9.4" fill="none" stroke="var(--wine-deep)" stroke-opacity=".45" stroke-width="1.1" stroke-linecap="round"/><path d="M12.4 5.6c.1-1.9 1.6-3.4 3.5-3.6.1 1.9-1.4 3.5-3.3 3.7Z" fill="currentColor" fill-opacity=".62"/></svg><span>Booty Builder</span></p>
     <h1>Un programma di allenamento costruito su di te</h1>
